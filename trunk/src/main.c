@@ -24,11 +24,14 @@ int main(int argc, char ** argv) {
 		printToScreen(x);
 	  freeMatrix(x);
 	} else {
-					fprintf(stderr,"Błąd! Nie mogłem utworzyć wektora wynikowego x.\n");
+					fprintf(stderr,"Blad! Nie moglem utworzyc wektora wynikowego x.\n");
 	}
 
 	freeMatrix(A);
 	freeMatrix(b);
+
+	/* bez tego -Wall nie przepuszcza main.c, daje ostrzezenie ze res jest nieuzywana */
+	res = res;
 
 	return 0;
 }
