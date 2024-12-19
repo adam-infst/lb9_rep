@@ -7,7 +7,7 @@
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
  */
 int eliminate(Matrix *mat, Matrix *b) {
-	int i, j, k;
+	int i, j, k, p, s;
 	int diagonal_length = mat->r < mat->c ? mat->r : mat->c;
 
 
@@ -48,20 +48,23 @@ int eliminate(Matrix *mat, Matrix *b) {
         /// ROZSZERZENIE O WYBÓR ELEMENTU GŁÓWNEGO - koniec zmian.
 
 		double pivot = mat->data[i][i];
+		if (pivot == 0) {
+			fprintf(stderr, "[!] Blad dzielenia przez 0! Macierz jest osobliwa");
+			return 1;
+		}
 
-		if (pivot == 0) return 1;
+		for (j = i+1; j < mat->r; j++) { /* zeruje po kolei elementy ponizej diagonalnej z tej kolumny */
 
-		for (j = i+1; j < mat->r; j++) /* zeruje po kolei elementy ponizej diagonalnej z tej kolumny */
-		{
 			double el_value = mat->data[j][i]; /* element ktory chcemy wyzerowac */
 			if (el_value == 0) continue;
 
-			for (k = 0; k < mat->c; k++)
-			{
+			for (k = 0; k < mat->c; k++) {
 				/* za pomoca petli mnozymy caly wiersz pzez pivot */
 				mat->data[j][k] *= pivot;
-				/* nowa wartosc elementu bedzie teraz rowna el_value * pivot, wiec zeby go wyzerowac
-				wystarczy el_value razy odjac wiersz z pivotem */
+
+				/* nowa wartosc zerowanego elementu bedzie teraz rowna el_value * pivot,
+				wiec zeby go wyzerowac wystarczy el_value razy odjac wiersz z pivotem */
+
 				mat->data[j][k] -= mat->data[i][k] * el_value;
 			}
 			/* trzeba wykonac ta sama operacje na macierzy zmiennych */
