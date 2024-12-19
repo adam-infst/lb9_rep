@@ -7,7 +7,7 @@
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
  */
 int eliminate(Matrix *mat, Matrix *b) {
-	int i, j, k, p, s;
+	int i, j, k;
 	int diagonal_length = mat->r < mat->c ? mat->r : mat->c;
 
 
@@ -49,7 +49,8 @@ int eliminate(Matrix *mat, Matrix *b) {
 
 		double pivot = mat->data[i][i];
 		if (pivot == 0) {
-			fprintf(stderr, "[!] Blad dzielenia przez 0! Macierz jest osobliwa");
+            // linijke poniżej zakomentowano, bo inaczej komunikat wyświetla się podwójnie (z gauss.c oraz backsubst.c)
+			// fprintf(stderr, "[!] Blad dzielenia przez 0! Macierz jest osobliwa");
 			return 1;
 		}
 
