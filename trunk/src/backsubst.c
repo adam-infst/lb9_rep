@@ -9,7 +9,7 @@
 int  backsubst(Matrix *x, Matrix *mat, Matrix *b) {
     // Czy dobry rozmiar? warunki na "n" na "n" itd.
     if (mat->r != mat->c || mat->r != b->r || b->c != 1 || x->r != b->r || x->c != 1) {
-        fprintf(stderr, "[!] Blad! Nieprawidlowe wymiary macierzy.");
+        fprintf(stderr, "[!] Blad! Nieprawidlowe wymiary macierzy.\n");
         return 2;
     }
 
@@ -19,7 +19,7 @@ int  backsubst(Matrix *x, Matrix *mat, Matrix *b) {
 
     for (i= n - 1; i >= 0; i--) {   // dlatego n - 1, bo np. w maciezy 3x3, ostatni element ma współrzędne data[2][2], bo indeksy zaczynają się od zera
         if (mat->data[i][i] == 0){
-            fprintf(stderr, "[!] Blad dzielenia przez 0! Element na diagonali = 0.");
+            fprintf(stderr, "[!] Blad dzielenia przez 0! Element na diagonali = 0.\n");
             return 1;
         }
 

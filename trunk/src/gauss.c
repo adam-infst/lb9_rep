@@ -28,8 +28,10 @@ int eliminate(Matrix *mat, Matrix *b) {
         }
 
      // jak max_wart == 0, macierz jest osobliwa (nie dalo by sie podzielic przez zero)
-        if (max_wart == 0)
+        if (max_wart == 0) {
+            fprintf(stderr, "[!] Blad dzielenia przez 0! Macierz osobliwa.\n");
             return 1;
+        }
 
         // zamiana wierszy, jeśli wiersz z max wartością, nie jest bieżącym wierszem
         if (max_row != i) {

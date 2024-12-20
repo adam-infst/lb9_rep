@@ -17,21 +17,29 @@ int main(int argc, char ** argv) {
 	printToScreen(b);
 
 	res = eliminate(A,b);
+	if (res == 1) {
+		freeMatrix(A);
+		freeMatrix(b);
+		return 0;
+	}
 	x = createMatrix(b->r, 1);
 	if (x != NULL) {
 		res = backsubst(x,A,b);
-
-		printToScreen(x);
-	  freeMatrix(x);
+		if (res != 0) {
+			freeMatrix(A);
+			freeMatrix(b);
+			freeMatrix(x);
+			return 0;
+		}
+	  	printToScreen(x);
+	  	freeMatrix(x);
 	} else {
 					fprintf(stderr,"Blad! Nie moglem utworzyc wektora wynikowego x.\n");
 	}
+	printf("Dane byly poprawne.\n");
 
 	freeMatrix(A);
 	freeMatrix(b);
-
-	/* bez tego -Wall nie przepuszcza main.c, daje ostrzezenie ze res jest nieuzywana */
-	res = res;
 
 	return 0;
 }
